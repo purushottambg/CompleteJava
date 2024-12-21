@@ -7,15 +7,15 @@ import java.sql.Statement;
 
 public class JDBCProgram{
     public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/prodfeatures";
+        String url = "jdbc:mysql://localhost:3306/prodfeatures";   //Credentials
         String user="root";
         String password="root";
         String query="select * from prodfeatures.posts";
         try {
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Connection connection = DriverManager.getConnection(url, user, password);   //Establish Connection
 
-            Statement statement = connection.createStatement();
-            ResultSet posts = statement.executeQuery(query);
+            Statement statement = connection.createStatement();             //Create Statement
+            ResultSet posts = statement.executeQuery(query);        //Execute Statement
             if (posts.next()) {
                 String createdAt = posts.getString("created_at");
                 int id = posts.getInt("id");
@@ -28,7 +28,7 @@ public class JDBCProgram{
             }else{
                 System.out.println("couldn't get any records");
             }
-            connection.close();
+            connection.close();     //Close Connection
         }catch (Exception e){
              e.printStackTrace();
         }
