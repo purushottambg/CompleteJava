@@ -6,6 +6,8 @@ public class InheritanceExample {
         System.out.println("Carur Capacity: "+alto.carryCapacity());
         alto.combuitonSound();
         System.out.println(alto.review());
+        System.out.println("Price: "+alto.priceRange());
+        System.out.println("Top Speed: "+alto.topSpeed()+" KM/PH");
     }
 }
 
@@ -15,9 +17,11 @@ class Alto implements Vehicle{
         System.out.println("droom droom");
     }
     public int carryCapacity() {
-        return topSpeed;
+        return 5;
     }
-
+    public int topSpeed() {
+        return 190;
+    }
     public long priceRange() {
         return 466357445;
     }
