@@ -1,4 +1,4 @@
-package java8features;
+package java8features.lambda;
 
 import java.util.Scanner;
 
