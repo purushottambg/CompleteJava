@@ -23,5 +23,23 @@ public class ReflectionClass {
         for (Method function: functions){
             System.out.println("Methods in target class: "+function);
         }
+
+        System.out.println("Now get declared methods");
+
+        Constructor[] declaredConstructors = reflector.getDeclaredConstructors();
+        Method[] declaredFunctions = reflector.getDeclaredMethods();
+
+        for (Constructor constructor: constructors){
+            System.out.println("constructors are: "+constructor);
+            Parameter[] parameters = constructor.getParameters();
+            for (Parameter parameter: parameters){
+                System.out.println("this constructor has parameter: "+parameter);
+            }
+            System.out.println();
+        }
+
+        for (Method function: functions){
+            System.out.println("Methods in target class: "+function);
+        }
     }
 }

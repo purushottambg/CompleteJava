@@ -55,6 +55,22 @@ public class TargetClass {
         this.name = name;
         this.address = address;
     }
+    public TargetClass(long studentID, double score,  String name, String address1) {
+            this.studentID = studentID;
+            this.score = score;
+            this.name = name;
+            this.address = address1;
+        }
+
     public TargetClass(){}
 
+    class InnerClass{
+        private String Secret;
+        private String message;
+
+        public InnerClass(String secret, String message) {
+            Secret = secret;
+            this.message = message;
+        }
+    }
 }
