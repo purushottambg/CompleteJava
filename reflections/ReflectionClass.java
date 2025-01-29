@@ -3,7 +3,12 @@ package reflections;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
-import java.util.function.Function;
+
+/*
+* Reflections in Java is the functionality that enables us to target the specific member in the
+* Class that is already defined inside the java. it's popular when you don't want to create actula
+* object of the class and still use the functionalities
+ */
 
 public class ReflectionClass {
     public static void main(String[] args) throws ClassNotFoundException {
