@@ -1,6 +1,5 @@
 package strings;
 
-
 import java.util.Scanner;
 
 class Operations{
