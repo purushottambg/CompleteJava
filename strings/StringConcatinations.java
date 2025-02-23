@@ -53,6 +53,7 @@ public class StringConcatinations {
         System.out.println("Choose Operation to perform:");
         System.out.println("1: Reverse      2: Palindrome");
         System.out.println("3: Vowels       4: Unique Chars");
+        System.out.println("5: Duplicate Chars: ");
         Integer Ops = scanner.nextInt();
         switch (Ops){
             case 1:
