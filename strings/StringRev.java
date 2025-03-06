@@ -12,12 +12,10 @@ public class StringRev {
         System.out.println("Reversed String val: "+revString);
     }
 
-    private static String revString(String str){
-        String revstr="";
-        int len = str.length()-1;
-        for (int i=len;i>=0;i--){
-           revstr+=str.charAt(i);
-        }
-        return revstr;
+    static String  revString(String str){
+        String revStringVal="";
+        for(int i=str.length()-1;i>=0;i--)
+            revStringVal+=str.charAt(i);
+        return revStringVal;
     }
 }
