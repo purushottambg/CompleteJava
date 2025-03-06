@@ -37,6 +37,8 @@ public class ArrayOps {
                     int iterator=0;
                     for(int i : intArray){
                         if (i==val2){
+                            String name;
+                            int salary;
                             intArray[iterator]=0;
                             flag=false;
                         }
