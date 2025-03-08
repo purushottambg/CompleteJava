@@ -25,13 +25,10 @@ class Two{
     }
 }
 public class FinalKeyword extends Two{
-
     public static void main(String[] args) {
         One one = new One();
         one.greet("Purushottam");
         Two two = new Two(32, "Purushottam");
         if(two.AgeLimit<=0) System.out.println("Age limit is Zero");
-
-
     }
 }
