@@ -7,19 +7,14 @@ public class Fibonacci {
         System.out.print("Enter number to print the series: ");
         Scanner scanner = new Scanner(System.in);
         int num = scanner.nextInt();
-        printSeries(num);
+        System.out.println(rec(num));
     }
 
-    private static int printSeries(int num){
-        if(num==0) System.out.println("0, ");
-        else if (num==1) {
-            System.out.println("1, ");
-            return num--;
+    private static int rec(int num){
+        if(num<=1){
+            return 1;
+        } else {
+             return rec(num-1)+rec(num-2);
         }
-        else {
-            printSeries(num--);
-            System.out.println(num+", ");
-        }
-        return 0;
     }
 }
