@@ -5,7 +5,6 @@ public class Concurrency extends Thread{
     public static void main(String[] args) {
         Concurrency concurrency = new Concurrency();
         concurrency.start();
-        //concurrency.run();
         if(concurrency.isAlive()) {
             System.out.println("Waiting...");
             globalVariable = globalVariable + 3;
