@@ -24,7 +24,7 @@ public class ThreadLifeCycle extends Thread{
         Thread.sleep(700);
         System.out.println("Sleep method is invoked, so State is: "+t1.getState());
         t1.join();
-        System.out.println("Called join() method, ");
+        System.out.println("Called join() method, now state is: "+t1.getState());
 
     }
 }
