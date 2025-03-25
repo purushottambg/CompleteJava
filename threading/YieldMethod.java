@@ -11,6 +11,7 @@ class MyThread extends Thread{
     public void run(){
         for(int i: IntStream.range(0, 100).toArray()){
             System.out.println(Thread.currentThread().getName()+" is running!!");
+            Thread.yield();
         }
     }
 }
