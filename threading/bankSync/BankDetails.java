@@ -2,10 +2,15 @@ package threading.bankSync;
 
 import exceptions.InsufficientFundException;
 
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class BankDetails {
 
     private double balance;
     private String name;
+    private final Lock lock=new ReentrantLock();
 
     public BankDetails(String name, double balance){
         this.balance = balance;
@@ -14,11 +19,20 @@ public class BankDetails {
     public BankDetails(){};
 
     public void withdraw (double amount) throws InsufficientFundException {
-        if(balance<amount){
-            throw new InsufficientFundException();
+        try {
+            if(lock.tryLock(1000, TimeUnit.MILLISECONDS)){
+                if(balance<amount){
+                    throw new InsufficientFundException();
+                }
+                System.out.println("Withdrawing "+amount+ " From the "+balance);
+                balance-=amount;
+                Thread.sleep(3000);
+            }
+        } catch (Exception e) {
+            System.out.println("Locked for a while");
+        }finally {
+            lock.unlock();
         }
-
-        balance-=amount;
     }
 
     public void getDetails(){
