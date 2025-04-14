@@ -16,7 +16,7 @@ public class PracticeMap {
         treeMap.put(12,"Pratik");
         treeMap.put(8,"Purushottam");
 
-        System.out.println(treeMap);
+        System.out.println(treeMap);  //print with the sout
 
     }
 }
