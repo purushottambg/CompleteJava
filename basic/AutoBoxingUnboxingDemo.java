@@ -23,7 +23,7 @@ public class AutoBoxingUnboxingDemo {
         // Unboxing while processing
         int sum = 0;
         for (Integer i : numbers) {
-            sum += i; // unboxing here
+            sum += i;  //unboxing is being performed here
         }
 
         System.out.println("Sum using unboxed ints: " + sum);
