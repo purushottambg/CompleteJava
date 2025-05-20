@@ -74,14 +74,15 @@ public class FilterTransactions {
         );
 
         List<Transactions> fraudlantTransactions = transactions.stream()
-                .filter(n->n.getThreshold()<10200)
+                .filter(n->n.getThreshold()>10000)
                 .filter(n->n.getDevicesInvolved().size()>=2)
                 .collect(Collectors.toList());
 
         System.out.println("We found total: "+fraudlantTransactions.size()+ "  Fake Transactions");
 
-        fraudlantTransactions.stream()
-                .forEach(System.out::println);
+        for (Transactions t: fraudlantTransactions){
+            System.out.println("id: "+t.getId()+" "+t.getThreshold());
+        }
 
     }
 }
