@@ -22,22 +22,39 @@ public class FindTallestPlant {
             heights[i]=scan.nextInt();
         }
 
-        System.out.print("Plant count taller than neighbours are:"+tallerPlants(heights));
+        System.out.print("Plant count taller than neighbours are:");
+        int[] plantsRetrieved = tallerPlants(heights);
+        for (int i: plantsRetrieved){
+            if(i!=0)
+                System.out.println(i);
+        }
     }
 
-    private static int tallerPlants(int[] plantHeights){
+    private static int[] tallerPlants(int[] plantHeights) throws ArrayIndexOutOfBoundsException{
         int result=0;
-
-        for(int i=0; i<plantHeights.length; i++){
-            if(i==0 && plantHeights[i]<plantHeights[i+1]){
-                result++;
-            }else if(i==plantHeights.length-1 && plantHeights[i]<plantHeights[i-1]){
-                result++;
+        int [] tallerPlants = new int[plantHeights.length] ;
+        for(int i=0; i<=plantHeights.length-1; i++){
+            System.out.println("Iteration for I:"+i+" capacity is:"+(plantHeights.length-1));
+            if(i==0){
+                if(plantHeights[i]>plantHeights[i+1]) {
+                    tallerPlants[result] = plantHeights[i];
+                    result++;
+                }
+                System.out.println("Iteration number is: "+(i+1)+" next digit is smaller: "+plantHeights[i+1]+" so result is:"+result);
+            }else if(i==plantHeights.length-1){
+                if(plantHeights[i]>plantHeights[i-1]) {
+                    tallerPlants[result] = plantHeights[i];
+                    result++;
+                }
+                System.out.println("Result: "+result);
+                System.out.println("Iteration number is: "+(i+1)+" last digit is smaller: "+plantHeights[i-1]+" so result is:"+result);
             } else if (plantHeights[i]>plantHeights[i+1] && plantHeights[i]>plantHeights[i-1]) {
+                tallerPlants[result] = plantHeights[i];
                 result++;
+                System.out.println("Iteration number is: "+(i+1)+" next digit is smaller: "+plantHeights[i+1]+" last digit is also smaller:"+plantHeights[i-1]+" so result is:"+result);
             }
         }
 
-        return result;
+        return tallerPlants;
     }
 }
