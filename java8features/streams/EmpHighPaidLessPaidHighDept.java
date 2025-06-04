@@ -1,7 +1,9 @@
 package java8features.streams;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Optional;
 import java.util.List;
-import java.util.stream.Stream;
 
 class Employee {
     private int id;
@@ -61,7 +63,7 @@ class Employee {
 
 public class EmpHighPaidLessPaidHighDept {
     public static void main(String[] args){
-        Stream<Employee> employees = Stream.of(
+        List<Employee> employees = Arrays.asList(
                 new Employee(1, "Rohit", "IT", 72000, true),
                 new Employee(2, "Anjali", "HR", 48000, true),
                 new Employee(3, "Sameer", "Sales", 23000, false),
@@ -74,6 +76,8 @@ public class EmpHighPaidLessPaidHighDept {
                 new Employee(10, "Deepak", "Sales", 25000, true)
         );
 
-        System.out.println("Total Employees are: "+employees.count());
+        System.out.println("Total Employees are: "+employees.stream().count()); //Check the elements given to the Streams
+        Optional<Employee> highestPaid = employees.max(Comparator.comparingDouble(Employee::getSalary));
+        System.out.println(employees.max(Comparator.comparingDouble(Employee::getSalary)));
     }
 }
