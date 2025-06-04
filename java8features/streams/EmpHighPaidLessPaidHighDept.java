@@ -77,7 +77,7 @@ public class EmpHighPaidLessPaidHighDept {
         );
 
         System.out.println("Total Employees are: "+employees.stream().count()); //Check the elements given to the Streams
-        Optional<Employee> highestPaid = employees.max(Comparator.comparingDouble(Employee::getSalary));
-        System.out.println(employees.max(Comparator.comparingDouble(Employee::getSalary)));
+        Optional<Employee> highestPaid = employees.stream().max(Comparator.comparingDouble(Employee::getSalary));
+        System.out.println(employees.stream().max(Comparator.comparingDouble(Employee::getSalary)));
     }
 }
