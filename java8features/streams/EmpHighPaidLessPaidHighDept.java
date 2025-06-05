@@ -1,15 +1,13 @@
 package java8features.streams;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Optional;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 class Employee {
     private int id;
     private String name;
     private String department;
-    private double salary;
+    private Double salary;
     private boolean isActive;
 
     public Employee(int id, String name, String department, double salary, boolean isActive) {
@@ -77,7 +75,28 @@ public class EmpHighPaidLessPaidHighDept {
         );
 
         System.out.println("Total Employees are: "+employees.stream().count()); //Check the elements given to the Streams
-        Optional<Employee> highestPaid = employees.stream().max(Comparator.comparingDouble(Employee::getSalary));
-        System.out.println(employees.stream().max(Comparator.comparingDouble(Employee::getSalary)));
+        Optional<Employee> employee = employees.stream().max(Comparator.comparingDouble(Employee::getSalary));
+        System.out.println("Highest Paid Employee: "+employee.get().getName());
+
+        Map<String, Optional<Employee>> highestByDept = employees.stream()
+                .collect(Collectors.groupingBy(
+                        Employee::getDepartment,
+                        Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary))
+                ));
+
+        System.out.println("Highest paid in all the departments: "+highestByDept);
+
+        String topPayingDept = employees.stream()
+                .collect(Collectors.groupingBy(
+                        Employee::getDepartment,
+                        Collectors.summingDouble(Employee::getSalary)
+                ))
+                .entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse("N/A");
+        System.out.println("Highest paid department: "+topPayingDept);
+
+
     }
 }
