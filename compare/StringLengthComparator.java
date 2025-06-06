@@ -14,9 +14,16 @@ public class StringLengthComparator {
         Comparator<String> stringComparator = new Comparator<String>() {
             @Override
             public int compare(String str1, String str2) {
-                if(str1.length()>str2.length())
+                if(str1.length()>str2.length()) {
+                    System.out.println(str1);
                     return 1;
-                else return 2;
+                }else if(str1.length()<str2.length()){
+                    return -1;
+                }
+                else {
+                    System.out.println(str1);
+                    return 0;
+                }
             }
         };
 
