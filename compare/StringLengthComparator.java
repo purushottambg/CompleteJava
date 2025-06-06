@@ -12,7 +12,7 @@ public class StringLengthComparator {
         Collections.sort(names);
         System.out.println("Collections.sort() method sorting:"+names);
         Comparator<String> stringComparator = new Comparator<String>() {
-            @Override
+
             public int compare(String str1, String str2) {
                 if(str1.length()>str2.length()) {
                     System.out.println(str1);
