@@ -1,11 +1,11 @@
 package java8features.consumer;
 
-import java.util.Arrays;
 import java.util.function.Consumer;
 import java.util.stream.IntStream;
 
 /**
- * The Consumer is a functional interface with
+ * The Consumer is a functional interface with accept abstract method
+ * while andThen() is a default method
  */
 public class ConsumeInt {
     public static void main(String[] args) {
