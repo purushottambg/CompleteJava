@@ -10,14 +10,19 @@ public class PrimeNumberCheckLoops {
         }
 
         public static void checkPrime(int number){
-            for(int i=1;i<number;i++){
+                 boolean flag=false;
+            for(int i=2;i<number;i++){
                 if(number%i==0 && i!=1){
-                    System.out.println(number+ " Prime");
+                    flag=true;
+                    break;
                 }else{
-                    System.out.println(number+ " Not Prime");
+                    flag=false;
                 }
-
             }
-
+            if (flag){
+                System.out.println(number+" not Prime");
+            }else {
+                System.out.println(number+" is Prime");
+            }
         }
     }
