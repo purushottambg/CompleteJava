@@ -101,6 +101,5 @@ public class AverageAgeByGender {
                 People::getGender, Collectors.averagingInt(People::getAge)
         ));
         System.out.println("Gender wise averageAges are: "+averageAges);
-
     }
 }
