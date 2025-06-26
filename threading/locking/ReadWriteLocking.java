@@ -61,17 +61,16 @@ public class ReadWriteLocking {
         // Create reader threads
         Thread reader1 = new Thread(readThread);
         Thread reader2 = new Thread(readThread);
-
-        // Create writer thread
+         // Create writer thread
         Thread writer1 = new Thread(writeThread, "Writer-1");
 
         // Start all
-        reader1.run();
+        reader2.run();
         writer1.run();
         reader2.run();
 
         try {
-            reader1.join();
+            reader2.join();
             writer1.join();
             reader2.join();
         } catch (InterruptedException e) {
