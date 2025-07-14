@@ -1,28 +1,36 @@
 package connectwise;
 
+import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
 
 class MyStack {
-    Stack<Integer> stack = new Stack<>();
-    public MyStack() {
+    Queue<Integer> q1;
+    Queue<Integer> q2;
 
+    public MyStack() {
     }
 
     public void push(int x) {
-        stack.push(x);
+        while (!q1.isEmpty()){
+            q2.add(q1.peek());
+        }
+        q1.add(x);
+        while (!q2.isEmpty()){
+            q1.add(q2.peek());
+        }
     }
 
     public int pop() {
-        return stack.pop();
+       return q1.remove();
     }
 
     public int top() {
-        return stack.peek();
+        return q1.peek();
     }
 
     public boolean empty() {
-        return stack.isEmpty();
+        return q1.isEmpty();
     }
 }
 
