@@ -8,19 +8,22 @@ public class CheckIfContNumsHasSum {
 
     public static boolean sumMethod(int[] arr, int num){
 
-        for (int i = 0; i < arr.length; i++) {
-            int k=i;
-            int result=0;
-            for (int j = 0; j <=i; j++) {
-                 result+=arr[j];
+        int left=0,right=0, sum=0;
+        while (left<arr.length){
+
+            sum+=arr[right];
+
+            while (sum>num && left<=right){
+                sum-=arr[left];
+                left++;
             }
-            System.out.println("Addition is:"+result);
-            if(result==num){
+
+            if(sum==num){
                 return true;
             }
 
+            right++;
         }
-
 
         return false;
     }
