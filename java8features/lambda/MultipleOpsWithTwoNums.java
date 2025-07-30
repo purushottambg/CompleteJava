@@ -34,6 +34,7 @@ public class MultipleOpsWithTwoNums {
             System.out.println("First element is greater");
         else
             System.out.println("Second element is greater");
+
         add.greetFunc("Purushottam");
     }
 
