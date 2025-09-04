@@ -1,6 +1,5 @@
 package java8features.lambda;
 
-
 import java.util.function.Predicate;
 
 public class CheckIfStringEmpty {
