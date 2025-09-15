@@ -62,7 +62,7 @@ class People{
 public class StreamEmployeeOps {
     public static void main(String[] args) {
         List<People> folks = Arrays.asList(
-                new People("Aarav", "Male", 2500.00, 28),
+                new People("Aarav", "Male", 8506.00, 28),
                 new People("Vihaan", "Male", 2400.50, 25),
                 new People("Shaurya", "Male", 2300.75, 30),
                 new People("Ishaan", "Male", 2200.00, 26),
@@ -89,6 +89,7 @@ public class StreamEmployeeOps {
         System.out.printf("%-30s %-25s %-20s \n", "Count People by Gender:", "Names older than 30:", "Sort by Salary Desc order:");
         System.out.printf("%-30s %-25s %-20s \n", "Check if all above 18:",  "Emp above 70k salary:",  "Find all duplicate names:");
         System.out.printf("%-30s %-25s %-20s \n", "Top highest 3 paid:", "average Age of highest 3:",  "name shorter length than 5:");
+        System.out.printf("%-30s %-25s %-20s \n", "Average Earning:", "more than average earning:",  "name shorter length than 5:");
 
         Scanner scan = new Scanner(System.in);
         Integer choice = scan.nextInt();
@@ -104,16 +105,14 @@ public class StreamEmployeeOps {
                 break;
 
             case 3: Map<String, Double> averageSalByGender = folks.stream()
-                    .collect(Collectors.groupingBy(
-                            People::getGender, Collectors.averagingDouble(People::getSalary)
-                    ));
+                    .collect(Collectors.groupingBy(n->n.getGender(),
+                            Collectors.averagingDouble(n->n.getSalary())));
+
                 System.out.println("Average by Gender: "+averageSalByGender);
                 break;
 
             case 4: Map<String, Long> countGroupByGender = folks.stream()
-                    .collect(Collectors.groupingBy(
-                            People::getGender, Collectors.counting()
-                    ));
+                            .collect(Collectors.groupingBy(People::getGender, Collectors.counting()));
                 System.out.println("Count by the Gender: "+countGroupByGender);
                 break;
 
@@ -124,14 +123,13 @@ public class StreamEmployeeOps {
                 System.out.println(peopleOver30);
                 break;
 
-            case 6: List<String> soredSalInDesc = folks.stream()
-                    .sorted(Comparator.comparingDouble(People::getSalary).reversed())
-                    .map(People::getName)
-                    .collect(Collectors.toList());
-                System.out.println("Names sorted based on the Salary: "+soredSalInDesc);
+            case 6: List<People> sortedBySalDesc = folks.stream()
+                            .sorted(Comparator.comparing(People::getSalary).reversed())
+                                    .collect(Collectors.toList());
+                System.out.println("Names sorted based on the Salary: "+sortedBySalDesc);
                 break;
 
-            case 7: System.out.println("Are all people Above 18: "+folks.stream().allMatch(ppl->ppl.getAge()>18));
+            case 7: System.out.println("Are all people Above 18: "+folks.stream().allMatch(ele -> ele.getAge()>18));
                 break;
 
             case 8: List<People> above70kEarner = folks.stream()
@@ -140,27 +138,33 @@ public class StreamEmployeeOps {
                 System.out.println("People earning over 70k:"+above70kEarner);
                 break;
 
-            case 9: Set<String> uniquePeople = new HashSet<>();
-                Set<String> duplicateNames = folks.stream()
-                    .map(People::getName)
-                        .filter(ppl -> !uniquePeople.add(ppl))
-                    .collect(Collectors.toSet());
-                System.out.println("People earning over 70k:"+duplicateNames);
+            case 9: HashMap<String, Long> duplicateNames = folks.stream()
+                            .collect(Collectors.groupingBy(People::getName, Collectors.counting()))
+                                    .entrySet().stream().filter(element->element.getValue()>1)
+                    .collect(Collectors.toMap(
+                            n->n.getKey(),
+                            n->n.getValue(),
+                            (n1, n2)->n1,
+                            HashMap::new
+                    ));
+
+                System.out.println("Duplicate Names:"+duplicateNames);
                 break;
 
             case 10: List<People> highest3Paid = folks.stream()
-                    .sorted(Comparator.comparingDouble(People::getSalary))
-                    .skip(folks.size()-3)
-                    .collect(Collectors.toList());
+                            .sorted(Comparator.comparing(People::getSalary).reversed()).limit(3)
+                                    .collect(Collectors.toList());
                 System.out.println("Highest paid 3 employees:"+highest3Paid);
                 break;
 
             case 11: // average age of high 3
                 Double averageAgeOfTop3Paid = folks.stream()
-                        .sorted(Comparator.comparingDouble(People::getSalary))
+                        .sorted(Comparator.comparing(People::getSalary).reversed())
                         .limit(3)
                         .mapToDouble(People::getAge)
-                        .average().orElse(0);
+                        .average()
+                        .orElse(0);
+
                 System.out.println("Average age of highest paid 3 employees:"+averageAgeOfTop3Paid);
                 break;
 
@@ -170,6 +174,19 @@ public class StreamEmployeeOps {
                         .map(People::getName)
                         .collect(Collectors.toList());
                 System.out.println("Names with shorter than 5 length: "+namesShorterThan5Chars);
+                break;
+
+            case 13: Double averageEarning = folks.stream().mapToDouble(People::getSalary).average().orElse(0);
+                System.out.println("Average Salary is:"+averageEarning);
+                break;
+
+            case 14: List<String> higherEarner = folks.stream()
+                    .filter(employee -> employee.getSalary()>
+                            folks.stream().mapToDouble(People::getSalary).average().orElse(0)
+                            ).map(People::getName).collect(Collectors.toList());
+
+                for (String people: higherEarner) System.out.println(people);
+
                 break;
 
             default:
