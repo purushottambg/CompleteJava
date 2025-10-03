@@ -1,6 +1,7 @@
-package basic;
+package companyWisePrep.PreciselyDoSelectPrep;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,11 +44,15 @@ public class FoodConsumerClassFilter {
                 new Consumer("Purushottam", 25, foodType.VEG),
                 new Consumer("Pallavi", 22,foodType.VEG),
                 new Consumer("Dipali", 29, foodType.VEG),
-                new Consumer("Sanjay",32, foodType.NONVEG)
+                new Consumer("Sanjay",32, foodType.NONVEG),
+                new Consumer("Samarth", 10, foodType.NONVEG)
         );
 
-        List<Consumer> vegies = consumers.stream().filter(c -> c.getFood()==foodType.VEG).collect(Collectors.toList());
-        List<Consumer> nonvegies = consumers.stream().filter(c -> c.getFood()==foodType.NONVEG).collect(Collectors.toList());
+        List<Consumer> vegies = consumers.stream().filter(c -> c.getFood()==foodType.VEG)
+                .sorted(Comparator.comparing(c->c.getAge()))
+                .collect(Collectors.toList());
+        List<Consumer> nonvegies = consumers.stream().filter(c -> c.getFood()==foodType.NONVEG)
+                .sorted(Comparator.comparing(Consumer::getAge)).collect(Collectors.toList());
 
         System.out.println("Vegies");
         for (Consumer c: vegies) System.out.println(c);
